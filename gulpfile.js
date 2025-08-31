@@ -18,6 +18,7 @@ import clone from 'gulp-clone';
 import autoprefixer from 'gulp-autoprefixer';
 import sourcemaps from 'gulp-sourcemaps';
 import cleanCSS from 'gulp-clean-css';
+import webpackConfig from './webpack.common.js';
 
 const sass = gulpSass(dartSass);
 const clonesink = clone.sink();
@@ -71,20 +72,7 @@ function scripts() {
 	let stream = gulp
 		.src(PATHS.source + PATHS.assets + PATHS.scripts + 'main.js')
 		.pipe(named())
-		.pipe(gulpWebpack({
-			mode: 'development',
-			module: {
-				rules: [
-					{
-						test: /\.js$/,
-						exclude: /node_modules/,
-						use: {
-							loader: 'babel-loader'
-						}
-					}
-				]
-			}
-		}))
+		.pipe(gulpWebpack(webpackConfig))
 		.on(
 			'error',
 			notify.onError({
