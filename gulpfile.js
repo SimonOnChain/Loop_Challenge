@@ -112,7 +112,7 @@ function styles () {
 	const assetDistributionDirectories = getAssetDistributionDirectories();
 
 	let stream = gulp
-		.src(PATHS.source + PATHS.assets + PATHS.styles + 'components/_footer.scss') // Target only _footer.scss
+		.src(PATHS.source + PATHS.assets + PATHS.styles + 'styles.scss') // Target main stylesheet
 		.pipe(sourcemaps.init()) // Initialize sourcemaps
 		.pipe(sassGlob())
 		.on(
