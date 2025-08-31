@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 export default {
 	mode: 'development',
-	devtool: 'cheap-module-source-map',
+	devtool: 'source-map',
 	output: {
 		publicPath: '{public_path}',
 	},
