@@ -17,7 +17,7 @@ export default {
 	resolve: {
 		extensions: ['*', '.js', '.vue'],
 		alias: {
-			vue$: 'vue/dist/vue.esm-bundler.js',
+			vue$: 'vue/dist/vue.runtime.esm-bundler.js',
 			Scripts: path.resolve(__dirname, 'templates/src/assets/scripts'),
 			Models: path.resolve(__dirname, 'templates/src/assets/scripts/models'),
 			Components: path.resolve(__dirname, 'templates/src/assets/scripts/components'),
