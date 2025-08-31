@@ -1,3 +1,5 @@
+@use '../variables' as *;
+
 .button {
 	$block: &;
 	$button-transition: $base_link_transition;
