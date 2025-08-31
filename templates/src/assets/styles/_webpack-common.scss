@@ -1,2 +1,2 @@
-@import 'variables';
-@import '~sass-mq';
+@use 'variables' as *;
+@use 'sass-mq' as *;

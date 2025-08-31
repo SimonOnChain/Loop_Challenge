@@ -1,6 +1,11 @@
 import gulp from 'gulp';
 import * as dartSass from 'sass';
 import gulpSass from 'gulp-sass';
+
+// Configure Sass to use modern API
+const sass = gulpSass(dartSass);
+sass.compiler = dartSass;
+
 import postcss from 'gulp-postcss';
 import sassGlob from 'gulp-sass-glob';
 import rename from 'gulp-rename';
@@ -20,7 +25,6 @@ import sourcemaps from 'gulp-sourcemaps';
 import cleanCSS from 'gulp-clean-css';
 import webpackConfig from './webpack.common.js';
 
-const sass = gulpSass(dartSass);
 const clonesink = clone.sink();
 
 const COPIED_ASSETS_DIRECTORIES = ['fonts']; // you may add here a list of asset directories that should be copied 1-to-1 to the asset distribution folders

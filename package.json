@@ -68,7 +68,7 @@
     "postcss": "^8.4.12",
     "postcss-loader": "^6.2.1",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.50.0",
+    "sass": "^1.91.0",
     "sass-loader": "^12.6.0",
     "sass-resources-loader": "^2.2.4",
     "svg-inline-loader": "^0.8.2",

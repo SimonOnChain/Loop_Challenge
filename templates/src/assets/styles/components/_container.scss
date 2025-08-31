@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .container {
 	$block: &;
 	margin: 0 auto;
@@ -7,7 +9,7 @@
 		padding: 0 $page-padding-big;
 
 		// Defaults to the "default" width if no specific size is selected
-		max-width: map-get($map: $container-widths, $key: default) + ($page-padding-big * 2);
+		max-width: map.get($container-widths, default) + ($page-padding-big * 2);
 
 		// Define container sizes
 		@each $name, $width in $container-widths {
