@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import dartSass from 'sass';
+import * as dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 import postcss from 'gulp-postcss';
 import sassGlob from 'gulp-sass-glob';
@@ -40,6 +40,85 @@ const PATHS = {
 const DEFAULT_PROJECT_CONFIG = {
 	assetDistributionDirectories: [{ directory: PATHS.distribution + PATHS.assets }],
 };
+
+function getAssetDistributionDirectories() {
+	return DEFAULT_PROJECT_CONFIG.assetDistributionDirectories;
+}
+
+function getFullCopiedAssetDirectories() {
+	return COPIED_ASSETS_DIRECTORIES.map(dir => PATHS.source + PATHS.assets + dir + '/**/*');
+}
+
+function iconsInline() {
+	const assetDistributionDirectories = getAssetDistributionDirectories();
+
+	let stream = gulp
+		.src(PATHS.source + PATHS.assets + PATHS.icons + PATHS.inlineIcons + '*.svg')
+		.pipe(svgmin())
+		.pipe(svgstore({ inlineSvg: true }))
+		.pipe(rename('icons-inline.svg'));
+
+	assetDistributionDirectories.forEach(function (assetsDistributionDirectory) {
+		stream = stream.pipe(gulp.dest(assetsDistributionDirectory + PATHS.icons));
+	});
+
+	return stream;
+}
+
+function scripts() {
+	const assetDistributionDirectories = getAssetDistributionDirectories();
+
+	let stream = gulp
+		.src(PATHS.source + PATHS.assets + PATHS.scripts + 'main.js')
+		.pipe(named())
+		.pipe(gulpWebpack({
+			mode: 'development',
+			module: {
+				rules: [
+					{
+						test: /\.js$/,
+						exclude: /node_modules/,
+						use: {
+							loader: 'babel-loader'
+						}
+					}
+				]
+			}
+		}))
+		.on(
+			'error',
+			notify.onError({
+				message: 'Error: <%= error.message %>',
+				title: 'Error running webpack task',
+			}),
+		);
+
+	assetDistributionDirectories.forEach(function (assetsDistributionDirectory) {
+		stream = stream.pipe(gulp.dest(assetsDistributionDirectory + PATHS.scripts));
+	});
+
+	return stream;
+}
+
+function html() {
+	return gulp
+		.src([PATHS.source + '**/*.html', PATHS.source + '**/*.php', '!' + PATHS.source + PATHS.assets + '**/*'])
+		.pipe(include())
+		.on(
+			'error',
+			notify.onError({
+				message: 'Error: <%= error.message %>',
+				title: 'Error running html/include task',
+			}),
+		)
+		.pipe(gulp.dest(PATHS.distribution));
+}
+
+function copy() {
+	return gulp
+		.src(getFullCopiedAssetDirectories())
+		.pipe(gulp.dest(PATHS.distribution + PATHS.assets));
+}
 
 function styles () {
 	const assetDistributionDirectories = getAssetDistributionDirectories();
