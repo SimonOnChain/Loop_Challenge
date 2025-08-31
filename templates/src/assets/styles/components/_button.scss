@@ -108,14 +108,14 @@
 
         &--hover-red {
             background-color: transparent;
-            color: $color-white; // Make sure this is the correct variable for white color
-            border: 1px solid $color-white; // Make sure this is the correct variable for white color
+            color: $color-light; // Make sure this is the correct variable for white color
+            border: 1px solid $color-light; // Make sure this is the correct variable for white color
             font-size: $font-size-large; // This will make the text a bit bigger
 
             .no-touch &:hover,
             .no-touch &:focus {
                 background-color: red; // The background turns red on hover
-                color: $color-white; // Text remains white on hover
+                color: $color-light; // Text remains white on hover
                 border-color: red; // Border turns red on hover
             }
 		}
