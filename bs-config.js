@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   server: "templates/dist",
   files: "templates/dist/**/*",
   port: 3000,
