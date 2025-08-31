@@ -205,5 +205,5 @@ const build = gulp.series(
 	gulp.parallel(scripts, stylesTasks, /* images, */ html), // Commented out as 'images' is not defined
 );
 
-export { icons, stylesTasks as styles, /* images, */ watchAssets as watch, build }; // Commented out as 'images' is not defined
+export { icons, stylesTasks as styles, stylesTasks as sass, /* images, */ watchAssets as watch, build }; // Commented out as 'images' is not defined
 export default build;
